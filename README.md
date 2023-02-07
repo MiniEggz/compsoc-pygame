@@ -104,5 +104,5 @@ All player information can be found in code/player.py.
 * Can you create your own level and make sure the player doesn't get stuck anywhere?
 * Can you change the background colour?
 * Can you change the colour of the tiles used to create the level?
-* Can you change the sprite for the player?
+* Can you change the sprite image for the player?
 * Can you change the speed of the player? What is too high or too low?
