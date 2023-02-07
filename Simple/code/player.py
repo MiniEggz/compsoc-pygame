@@ -1,18 +1,19 @@
 import pygame 
-from support import import_folder
+
 
 class Player(pygame.sprite.Sprite):
+
+	#Setup the player
 	def __init__(self,pos,surface):
 		super().__init__()
-		self.import_character_assets()
 		self.frame_index = 0
 		self.animation_speed = 0.15
-		self.image = self.animations['idle'][0]
+		self.image = pygame.image.load("../graphics/1.png")
 		self.rect = self.image.get_rect(topleft = pos)
 
 		# player movement
 		self.direction = pygame.math.Vector2(0,0)
-		self.speed = 1000
+		self.speed = 8
 		self.gravity = 0.8
 		self.jump_speed = -16
 
@@ -24,14 +25,7 @@ class Player(pygame.sprite.Sprite):
 		self.on_left = False
 		self.on_right = False
 
-	def import_character_assets(self):
-		character_path = '../graphics/character/'
-		self.animations = {'idle':[]}
-
-		for animation in self.animations.keys():
-			full_path = character_path + animation
-			self.animations[animation] = import_folder(full_path)
-
+	#Gets the user
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
@@ -46,8 +40,8 @@ class Player(pygame.sprite.Sprite):
 
 		if keys[pygame.K_SPACE] and self.on_ground:
 			self.jump()
-			
 
+	#Gets the player status
 	def get_status(self):
 		if self.direction.y < 0:
 			self.status = 'jump'
@@ -59,13 +53,16 @@ class Player(pygame.sprite.Sprite):
 			else:
 				self.status = 'idle'
 
+	#Is used to make the player be able to fall
 	def apply_gravity(self):
 		self.direction.y += self.gravity
 		self.rect.y += self.direction.y
 
+	#Is used to make the player be able to jumper
 	def jump(self):
 		self.direction.y = self.jump_speed
 
+	#Updates player
 	def update(self):
 		self.get_input()
 		self.get_status()
