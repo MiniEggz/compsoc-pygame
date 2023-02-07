@@ -22,9 +22,12 @@ class Level:
 			self.player_on_ground = False
 
 	def setup_level(self,layout):
+		# groups all tiles together
 		self.tiles = pygame.sprite.Group()
+		# player is separate entity
 		self.player = pygame.sprite.GroupSingle()
 
+		# sets up the level as outlined in the settings file
 		for row_index,row in enumerate(layout):
 			for col_index,cell in enumerate(row):
 				x = col_index * tile_size
@@ -34,14 +37,18 @@ class Level:
 					tile = Tile((x,y),tile_size)
 					self.tiles.add(tile)
 				if cell == 'P':
-					player_sprite = Player((x,y),self.display_surface)
+					player_sprite = Player((x,y))
 					self.player.add(player_sprite)
 
 	def scroll_x(self):
+		"""Scrolls in x direction when player moves off the screen."""
+		# get all information needed to scroll
 		player = self.player.sprite
 		player_x = player.rect.centerx
 		direction_x = player.direction.x
 
+		# scroll left or right
+		# if scrolling, player does not actually move, the world moves around them
 		if player_x < screen_width / 4 and direction_x < 0:
 			self.world_shift = 8
 			player.speed = 0
@@ -53,9 +60,11 @@ class Level:
 			player.speed = 8
 
 	def horizontal_movement_collision(self):
+		# get information about player
 		player = self.player.sprite
 		player.rect.x += player.direction.x * player.speed
 
+		# detect movement collision in horizontal direction
 		for sprite in self.tiles.sprites():
 			if sprite.rect.colliderect(player.rect):
 				if player.direction.x < 0: 

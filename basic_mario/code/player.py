@@ -2,7 +2,7 @@ import pygame
 from support import import_folder
 
 class Player(pygame.sprite.Sprite):
-	def __init__(self,pos,surface):
+	def __init__(self,pos):
 		super().__init__()
 		self.import_character_assets()
 		self.frame_index = 0
@@ -25,14 +25,22 @@ class Player(pygame.sprite.Sprite):
 		self.on_right = False
 
 	def import_character_assets(self):
+		"""Imports character assets."""
+		# path to character assets
 		character_path = '../graphics/character/'
+		# set animations as empty
 		self.animations = {'idle':[],'run':[],'jump':[],'fall':[]}
 
+		# fill spaces for animations
 		for animation in self.animations.keys():
+			# get path for animation
+
+			# this could be simplified by just having character path + animation + .png
 			full_path = character_path + animation
 			self.animations[animation] = import_folder(full_path)
 
 	def animate(self):
+		# current animation dependent on status
 		animation = self.animations[self.status]
 
 		# loop over frame index 
@@ -40,6 +48,7 @@ class Player(pygame.sprite.Sprite):
 		if self.frame_index >= len(animation):
 			self.frame_index = 0
 
+		# this can definitely be simplified
 		image = animation[int(self.frame_index)]
 		if self.facing_right:
 			self.image = image
@@ -47,6 +56,7 @@ class Player(pygame.sprite.Sprite):
 			flipped_image = pygame.transform.flip(image,True,False)
 			self.image = flipped_image
 
+		# what does this do?
 		# set the rect
 		if self.on_ground and self.on_right:
 			self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
@@ -61,9 +71,11 @@ class Player(pygame.sprite.Sprite):
 		elif self.on_ceiling:
 			self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
+	# get input from pygame
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
+		# change things depending on input
 		if keys[pygame.K_RIGHT]:
 			self.direction.x = 1
 			self.facing_right = True
@@ -76,6 +88,7 @@ class Player(pygame.sprite.Sprite):
 		if keys[pygame.K_SPACE] and self.on_ground:
 			self.jump()
 
+	# get status of the character
 	def get_status(self):
 		if self.direction.y < 0:
 			self.status = 'jump'
@@ -88,10 +101,12 @@ class Player(pygame.sprite.Sprite):
 				self.status = 'idle'
 
 	def apply_gravity(self):
+		# apply gravity to character
 		self.direction.y += self.gravity
 		self.rect.y += self.direction.y
 
 	def jump(self):
+		# jump
 		self.direction.y = self.jump_speed
 
 	def update(self):
