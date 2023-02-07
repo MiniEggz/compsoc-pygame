@@ -63,16 +63,22 @@ class Level:
 		# get information about player
 		player = self.player.sprite
 		player.rect.x += player.direction.x * player.speed
+		# player.direction.x => 0 if still, -1 if left, 1 if right
 
 		# detect movement collision in horizontal direction
 		for sprite in self.tiles.sprites():
+			# if the sprite is colliding with the player rectangle
 			if sprite.rect.colliderect(player.rect):
 				if player.direction.x < 0: 
+					# is not moving horizontally
 					player.rect.left = sprite.rect.right
+					# on left of tile
 					player.on_left = True
 					self.current_x = player.rect.left
 				elif player.direction.x > 0:
+					# moving right
 					player.rect.right = sprite.rect.left
+					# on right of tile
 					player.on_right = True
 					self.current_x = player.rect.right
 
@@ -83,32 +89,41 @@ class Level:
 
 	def vertical_movement_collision(self):
 		player = self.player.sprite
+		# unsurprisingly, just forces the player downwards to the floor
 		player.apply_gravity()
 
+
 		for sprite in self.tiles.sprites():
+			# checks whether there is a collision
 			if sprite.rect.colliderect(player.rect):
 				if player.direction.y > 0: 
+					# player is going downwards
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
 					player.on_ground = True
 				elif player.direction.y < 0:
+					# player going upwards
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = 0
 					player.on_ceiling = True
 
 		if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
+			# on ground and going up or down
 			player.on_ground = False
 		if player.on_ceiling and player.direction.y > 0.1:
+			# on ceiling and going down significantly
 			player.on_ceiling = False
 
 	def run(self):
 
 		# level tiles
+		# updates and changes everything
 		self.tiles.update(self.world_shift)
 		self.tiles.draw(self.display_surface)
 		self.scroll_x()
 
 		# player
+		# update player data and handle collisions
 		self.player.update()
 		self.horizontal_movement_collision()
 		self.get_player_on_ground()

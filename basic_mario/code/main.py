@@ -15,7 +15,9 @@ while True:
 			sys.exit()
 	
 	screen.fill('black')
+	# run loop controlled by this method
 	level.run()
 
+	# updates the display
 	pygame.display.update()
 	clock.tick(60)

@@ -1,6 +1,8 @@
 from os import walk
 import pygame
 
+# this is used to load images
+# this can be removed
 def import_folder(path):
 	surface_list = []
 
