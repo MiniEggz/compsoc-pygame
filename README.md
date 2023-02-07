@@ -24,7 +24,7 @@ First things first, open up the "Python Command Prompt" (press windows key and s
 
 <a name="install-pygame"></a>
 ### Installing pygame
-Now we need to install pygame using the command prompt...
+Now we need to install pygame using the python command prompt...
 ```bash
 pip install pygame
 ```
