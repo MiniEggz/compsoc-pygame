@@ -13,6 +13,7 @@ Their git repository can be accessed here: https://github.com/clear-code-project
 2.1. [Basic Setup of PyGame](#basic-setup)
 2.2. [Level Design](#level-design)
 2.3. [The Player](#the-player)
+3. [Challenges](#challenges)
 
 <a name="start"></a>
 ## Getting started
@@ -21,7 +22,7 @@ Their git repository can be accessed here: https://github.com/clear-code-project
 #### Setting up python
 First things first, open up the "Python Command Prompt" (press windows key and search for "python").
 
-<a name="install-pygame">
+<a name="install-pygame"></a>
 ### Installing pygame
 Now we need to install pygame using the command prompt...
 ```bash
@@ -94,3 +95,14 @@ All code involved in level design can be found mainly in level.py and tiles.py -
 Creating the player is obviously a very important part of creating a game. You need to decide how the player will move, how they can interact with their environment, what they will look like, etc...
 
 All player information can be found in code/player.py.
+
+
+<a name="challenges"></a>
+# Challenges
+* Clone this repository
+* Run the code and have a run around!
+* Can you create your own level and make sure the player doesn't get stuck anywhere?
+* Can you change the background colour?
+* Can you change the colour of the tiles used to create the level?
+* Can you change the sprite for the player?
+* Can you change the speed of the player? What is too high or too low?
