@@ -106,3 +106,4 @@ All player information can be found in code/player.py.
 * Can you change the colour of the tiles used to create the level?
 * Can you change the sprite image for the player?
 * Can you change the speed of the player? What is too high or too low?
+* Can you change the Simple code so you can move with A and D as well as the arrows (maybe add w as jump)?
