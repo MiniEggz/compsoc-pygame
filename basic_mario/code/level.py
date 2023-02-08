@@ -1,4 +1,5 @@
-import pygame 
+import pygame
+import sys
 from tiles import Tile 
 from settings import tile_size, screen_width
 from player import Player
@@ -39,6 +40,9 @@ class Level:
 				if cell == 'P':
 					player_sprite = Player((x,y))
 					self.player.add(player_sprite)
+				if cell == 'W':
+					tile = Tile((x, y), tile_size, 'blue')
+					self.tiles.add(tile)
 
 	def scroll_x(self):
 		"""Scrolls in x direction when player moves off the screen."""
@@ -69,6 +73,7 @@ class Level:
 		for sprite in self.tiles.sprites():
 			# if the sprite is colliding with the player rectangle
 			if sprite.rect.colliderect(player.rect):
+				self.check_win(sprite)
 				if player.direction.x < 0: 
 					# is not moving horizontally
 					player.rect.left = sprite.rect.right
@@ -96,6 +101,7 @@ class Level:
 		for sprite in self.tiles.sprites():
 			# checks whether there is a collision
 			if sprite.rect.colliderect(player.rect):
+				self.check_win(sprite)
 				if player.direction.y > 0: 
 					# player is going downwards
 					player.rect.bottom = sprite.rect.top
@@ -113,6 +119,12 @@ class Level:
 		if player.on_ceiling and player.direction.y > 0.1:
 			# on ceiling and going down significantly
 			player.on_ceiling = False
+
+	def check_win(self, sprite):
+		if sprite.get_color() == 'blue':
+			print('You Win!')
+			pygame.quit()
+			sys.exit()
 
 	def run(self):
 

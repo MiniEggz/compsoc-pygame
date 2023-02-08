@@ -2,7 +2,7 @@ from os import walk
 import pygame
 
 # this is used to load images
-# this can be removed
+# this can be removed if using a more simple animation system
 def import_folder(path):
 	surface_list = []
 
