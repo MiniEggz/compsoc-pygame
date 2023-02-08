@@ -13,7 +13,8 @@ while True:
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
-	
+
+	#Background colour
 	screen.fill('yellow')
 	level.run()
 

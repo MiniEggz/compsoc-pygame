@@ -2,7 +2,7 @@ level_map = [
 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                            X',
 'X                            ',
 'X                            ',
-'X XX    XXX            XX    ',
+'X XX    XXX            XX                                                                                                                                                              E',
 'X XX P                                                 X             X             X             X             X             X             X             X             X             X             X',
 'X XXXX         XX         XX XXXXX         XX         XX XXXXX     X    XX     X    XX XXXXX         XX    X     XX XXXXX         XX         XX XXXXX         XX         XX XXXXX         XX         XX X',
 'X XXXX        XX              XXXXX        XX    X         XXXXX        XX              XXXXX        XX              XXXXX        XX              XXXXX        XX              XXXXX        XX              X',

@@ -1,12 +1,13 @@
-import pygame 
+import pygame, sys
 from tiles import Tile 
 from settings import tile_size, screen_width
 from player import Player
 
 
 class Level:
+	#Set up the class
 	def __init__(self,level_data,surface):
-		self.max_speed = 100
+		self.max_speed = 8
 		# level setup
 		self.display_surface = surface 
 		self.setup_level(level_data)
@@ -16,13 +17,14 @@ class Level:
 		# dust 
 		self.player_on_ground = False
 
-
+	#Sets ground variable
 	def get_player_on_ground(self):
 		if self.player.sprite.on_ground:
 			self.player_on_ground = True
 		else:
 			self.player_on_ground = False
 
+	#Sets up the tiles on the level
 	def setup_level(self,layout):
 		self.tiles = pygame.sprite.Group()
 		self.player = pygame.sprite.GroupSingle()
@@ -33,12 +35,17 @@ class Level:
 				y = row_index * tile_size
 				
 				if cell == 'X':
-					tile = Tile((x,y),tile_size)
+					tile = Tile((x,y),tile_size,"lime")
 					self.tiles.add(tile)
-				if cell == 'P':
-					player_sprite = Player((x,y))
-					self.player.add(player_sprite)
 
+				elif cell == 'P':
+					player_sprite = Player((x,y), self.display_surface)
+					self.player.add(player_sprite)
+				elif cell == 'E':
+					tile = Tile((x, y), tile_size, "blue")
+					self.tiles.add(tile)
+
+	#Makes it so the map scrolls along the x
 	def scroll_x(self):
 		player = self.player.sprite
 		player_x = player.rect.centerx
@@ -54,6 +61,20 @@ class Level:
 			self.world_shift = 0
 			player.speed = self.max_speed
 
+	#Makes win condition
+	def win(self):
+		player = self.player.sprite
+		player.rect.x += player.direction.x * player.speed
+		player.apply_gravity()
+
+		for sprite in self.tiles.sprites():
+			if sprite.rect.colliderect(player.rect):
+				if sprite.get_colour() == "blue":
+					print("YOU WINNNNNNNN")
+					pygame.quit()
+					sys.exit()
+
+	#Checks if player is colliding with tiles on the x
 	def horizontal_movement_collision(self):
 		player = self.player.sprite
 		player.rect.x += player.direction.x * player.speed
@@ -74,12 +95,14 @@ class Level:
 		if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
 			player.on_right = False
 
+	#Checks if player is colliding with tiles on the y
 	def vertical_movement_collision(self):
 		player = self.player.sprite
 		player.apply_gravity()
 
 		for sprite in self.tiles.sprites():
 			if sprite.rect.colliderect(player.rect):
+
 				if player.direction.y > 0: 
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
@@ -94,6 +117,7 @@ class Level:
 		if player.on_ceiling and player.direction.y > 0.1:
 			player.on_ceiling = False
 
+	#runs the level
 	def run(self):
 
 
@@ -109,4 +133,5 @@ class Level:
 		self.horizontal_movement_collision()
 		self.get_player_on_ground()
 		self.vertical_movement_collision()
+		self.win()
 		self.player.draw(self.display_surface)
