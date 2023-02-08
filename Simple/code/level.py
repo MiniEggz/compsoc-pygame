@@ -14,7 +14,6 @@ class Level:
 		self.current_x = 0
 
 		# dust 
-		self.dust_sprite = pygame.sprite.GroupSingle()
 		self.player_on_ground = False
 
 
@@ -37,7 +36,7 @@ class Level:
 					tile = Tile((x,y),tile_size)
 					self.tiles.add(tile)
 				if cell == 'P':
-					player_sprite = Player((x,y), self.display_surface)
+					player_sprite = Player((x,y))
 					self.player.add(player_sprite)
 
 	def scroll_x(self):
