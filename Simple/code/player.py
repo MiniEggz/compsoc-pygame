@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
 		self.on_left = False
 		self.on_right = False
 
-	#Gets the user
+	#Gets the users input
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
