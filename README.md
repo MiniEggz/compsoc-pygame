@@ -4,11 +4,13 @@ NOTE: this workshop is an adaptation of the work by https://www.youtube.com/@Cle
 
 Their git repository can be accessed here: https://github.com/clear-code-projects/2D_Platformer_Logic.
 
+We have tried to comment the code as verbosely as possible to make it as easy to understand as possible, but give us a shout if things aren't making sense.
+
 ## Contents...
 1. [Getting Started](#start)
 1.1. [Setting Up Python](#setup)
 1.2. [Installing Pygame](#install-pygame)
-1.3. [Setting Up Project Folder](#setup-project)
+1.3. [Cloning Our Repo](#setup-project)
 2. [Making Our First Game](#first-game)
 2.1. [Basic Setup of PyGame](#basic-setup)
 2.2. [Level Design](#level-design)
@@ -30,29 +32,25 @@ pip install pygame
 ```
 
 <a name="setup-project"></a>
-### Setting up the python project
+### Clone Our Repo
 
 From here, you want to make sure your terminal is in the right place: the U drive.
 ```bash
 cd U:
 ```
 
-If you want to download all the files of the quick game concept we made, clone or fork our repository.
+Clone our repo so you can start playing around with things.
 ```bash
 git clone git@github.com:MiniEggz/compsoc-pygame.git
 ```
-Otherwise, you can just create a folder in the U drive and work from there. After setting up the project folder, cd into it with:
+
+cd into the repo
 ```bash
 cd compsoc-pygame
 ```
-if you are using our repo or
-```bash
-cd <your-folder-name>
-```
-if not.
 
 <a name="first-game"></a>
-## Moving onto making our first game!
+## Playing around with our first game!
 
 <a name="basic-setup"></a>
 ### Basic setup
@@ -87,6 +85,8 @@ pygame.quit()
 Level design can be done in a number of different ways, most of which are very complex and completely out of scope for today. The method of level design we've gone for today helps us create different levels extremely quickly.
 
 The player start position is marked by 'P', blocks are marked by 'X' and empty space is just marked by a space (' ').
+
+In Simple, the win block is denoted 'E' and in basic_mario, the win block is denoted 'W'.
 
 All code involved in level design can be found mainly in level.py and tiles.py - settings.py also contains some level data.
 
